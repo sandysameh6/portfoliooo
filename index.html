@@ -1,0 +1,3887 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portfolio of Sandy Sameh - Computer Science Student & Aspiring Full-Stack .NET Developer. Specialized in modern front-end, C#, ASP.NET, and practical digital solutions.">
+  <meta name="keywords" content="Sandy Sameh, Full-Stack Developer, .NET, C#, Front End, Computer Science, AAST, Portfolio">
+  <meta name="author" content="Sandy Sameh">
+  <meta property="og:title" content="sandy sameh | Computer Science Student & Full-Stack .NET Developer">
+  <meta property="og:description" content="Personal portfolio of Sandy Sameh - Computer Science student at AAST passionate about building practical digital solutions.">
+  <meta property="og:type" content="website">
+  <title>sandy sameh | Portfolio</title>
+
+  <style>
+    /* ==========================================================================
+       1. COLOR SYSTEM & CSS TOKENS
+       ========================================================================== */
+    :root {
+      /* Dark Theme (Default) */
+      --bg-primary: #0B0F19;
+      --bg-secondary: #111827;
+      --bg-card: #151D2E;
+      --text-primary: #F8FAFC;
+      --text-secondary: #94A3B8;
+      --accent: #7C3AED;
+      --accent-secondary: #A78BFA;
+      --border: #273449;
+
+      /* Additional helper tokens */
+      --accent-gradient: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 100%);
+      --accent-glow: rgba(124, 58, 237, 0.28);
+      --card-glass: rgba(21, 29, 46, 0.75);
+      --card-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.55);
+      --card-shadow-hover: 0 20px 40px -12px rgba(124, 58, 237, 0.28);
+      --badge-bg: rgba(124, 58, 237, 0.12);
+      --badge-text: #C4B5FD;
+      --nav-glass: rgba(11, 15, 25, 0.85);
+      --nav-border: rgba(39, 52, 73, 0.8);
+      --success: #10B981;
+      --success-bg: rgba(16, 185, 129, 0.12);
+
+      /* Typography & Metrics */
+      --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', 'Helvetica Neue', Arial, sans-serif;
+      --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Fira Code', monospace;
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-full: 9999px;
+      --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-normal: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      --container-max: 1200px;
+      --header-height: 76px;
+    }
+
+    [data-theme="light"] {
+      /* Light Theme */
+      --bg-primary: #F8FAFC;
+      --bg-secondary: #EEF2FF;
+      --bg-card: #FFFFFF;
+      --text-primary: #111827;
+      --text-secondary: #64748B;
+      --accent: #6D28D9;
+      --accent-secondary: #8B5CF6;
+      --border: #E2E8F0;
+
+      --accent-gradient: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 100%);
+      --accent-glow: rgba(109, 40, 217, 0.18);
+      --card-glass: rgba(255, 255, 255, 0.85);
+      --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.03);
+      --card-shadow-hover: 0 20px 35px -8px rgba(109, 40, 217, 0.16);
+      --badge-bg: rgba(109, 40, 217, 0.08);
+      --badge-text: #6D28D9;
+      --nav-glass: rgba(248, 250, 252, 0.88);
+      --nav-border: rgba(226, 232, 240, 0.9);
+      --success: #059669;
+      --success-bg: rgba(5, 150, 105, 0.1);
+    }
+
+    /* ==========================================================================
+       2. GLOBAL RESET & BASE STYLES
+       ========================================================================== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.65;
+      overflow-x: hidden;
+      min-height: 100vh;
+      transition: background-color var(--transition-normal), color var(--transition-normal);
+    }
+
+    ::selection {
+      background-color: var(--accent);
+      color: #FFFFFF;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: color var(--transition-fast);
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      background: none;
+      color: inherit;
+    }
+
+    svg {
+      display: inline-block;
+      vertical-align: middle;
+      flex-shrink: 0;
+    }
+
+    /* Accessibility Focus Styles */
+    :focus-visible {
+      outline: 2px solid var(--accent-secondary);
+      outline-offset: 3px;
+    }
+
+    /* Container */
+    .container {
+      width: 100%;
+      max-width: var(--container-max);
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+
+    /* Section Typography */
+    .section {
+      padding: 6.5rem 0;
+      position: relative;
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto 3.75rem auto;
+    }
+
+    .section-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent-secondary);
+      background: var(--badge-bg);
+      padding: 0.35rem 0.9rem;
+      border-radius: var(--radius-full);
+      border: 1px solid var(--border);
+      margin-bottom: 0.85rem;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 4vw, 2.75rem);
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      color: var(--text-primary);
+      line-height: 1.2;
+    }
+
+    .section-subtitle {
+      margin-top: 0.85rem;
+      color: var(--text-secondary);
+      font-size: 1.0625rem;
+    }
+
+    /* ==========================================================================
+       3. NAVIGATION (STICKY, BLUR, ACTIVE STATE, MOBILE DRAWER)
+       ========================================================================== */
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      height: var(--header-height);
+      transition: background-color var(--transition-normal), border-color var(--transition-normal), box-shadow var(--transition-normal), height var(--transition-fast);
+      background-color: transparent;
+      border-bottom: 1px solid transparent;
+    }
+
+    .site-header.scrolled {
+      background-color: var(--nav-glass);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom-color: var(--nav-border);
+      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.2);
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 100%;
+    }
+
+    /* Brand Logo */
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      font-weight: 800;
+      font-size: 1.25rem;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+      text-transform: lowercase;
+    }
+
+    .brand-symbol {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      background: var(--accent-gradient);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #FFFFFF;
+      font-family: var(--font-mono);
+      font-size: 0.95rem;
+      font-weight: 700;
+      box-shadow: 0 4px 12px var(--accent-glow);
+    }
+
+    .brand-dot {
+      color: var(--accent-secondary);
+    }
+
+    /* Desktop Nav Links */
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      list-style: none;
+    }
+
+    .nav-link {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      padding: 0.45rem 0.75rem;
+      border-radius: var(--radius-sm);
+      position: relative;
+      transition: color var(--transition-fast), background-color var(--transition-fast);
+      white-space: nowrap;
+    }
+
+    .nav-link:hover {
+      color: var(--text-primary);
+      background-color: var(--badge-bg);
+    }
+
+    .nav-link.active {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    .nav-link.active::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0.75rem;
+      right: 0.75rem;
+      height: 2px;
+      background: var(--accent-gradient);
+      border-radius: 2px;
+    }
+
+    /* Nav Actions */
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    /* Theme Toggle Button */
+    .theme-toggle-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      color: var(--text-primary);
+      transition: border-color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+    }
+
+    .theme-toggle-btn:hover {
+      border-color: var(--accent-secondary);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px var(--accent-glow);
+    }
+
+    .theme-icon-sun,
+    .theme-icon-moon {
+      transition: transform var(--transition-normal), opacity var(--transition-normal);
+    }
+
+    [data-theme="dark"] .theme-icon-sun {
+      display: block;
+    }
+    [data-theme="dark"] .theme-icon-moon {
+      display: none;
+    }
+    [data-theme="light"] .theme-icon-sun {
+      display: none;
+    }
+    [data-theme="light"] .theme-icon-moon {
+      display: block;
+    }
+
+    /* Hamburger Button (Mobile) */
+    .hamburger-btn {
+      display: none;
+      width: 42px;
+      height: 42px;
+      border-radius: var(--radius-sm);
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 5px;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      color: var(--text-primary);
+      z-index: 1010;
+    }
+
+    .hamburger-line {
+      width: 20px;
+      height: 2px;
+      background-color: var(--text-primary);
+      transition: transform var(--transition-normal), opacity var(--transition-normal);
+      transform-origin: center;
+    }
+
+    .hamburger-btn[aria-expanded="true"] .hamburger-line:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+    .hamburger-btn[aria-expanded="true"] .hamburger-line:nth-child(2) {
+      opacity: 0;
+    }
+    .hamburger-btn[aria-expanded="true"] .hamburger-line:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    /* Mobile Nav Drawer */
+    .mobile-nav-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity var(--transition-normal), visibility var(--transition-normal);
+      z-index: 998;
+    }
+
+    .mobile-nav-backdrop.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .mobile-nav-drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: min(320px, 85vw);
+      background: var(--bg-card);
+      border-left: 1px solid var(--border);
+      padding: 5.5rem 1.75rem 2rem 1.75rem;
+      transform: translateX(100%);
+      transition: transform var(--transition-normal);
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow-y: auto;
+      box-shadow: -10px 0 30px rgba(0, 0, 0, 0.35);
+    }
+
+    .mobile-nav-drawer.open {
+      transform: translateX(0);
+    }
+
+    .mobile-menu {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .mobile-nav-link {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1rem;
+      border-radius: var(--radius-sm);
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      transition: background-color var(--transition-fast), color var(--transition-fast);
+    }
+
+    .mobile-nav-link:hover,
+    .mobile-nav-link.active {
+      color: var(--text-primary);
+      background-color: var(--badge-bg);
+      font-weight: 600;
+    }
+
+    .mobile-nav-link.active {
+      border-left: 3px solid var(--accent);
+    }
+
+    .mobile-drawer-footer {
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    /* ==========================================================================
+       4. HERO SECTION (HOME)
+       ========================================================================== */
+    .hero-section {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: calc(var(--header-height) + 2rem);
+      padding-bottom: 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Ambient Background Elements */
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.45;
+      transition: transform 0.2s ease-out;
+      will-change: transform;
+    }
+
+    [data-theme="light"] .blob {
+      opacity: 0.25;
+      filter: blur(90px);
+    }
+
+    .blob-1 {
+      top: 10%;
+      left: 15%;
+      width: 480px;
+      height: 480px;
+      background: radial-gradient(circle, var(--accent) 0%, rgba(124, 58, 237, 0) 70%);
+      animation: floatSlow 18s ease-in-out infinite alternate;
+    }
+
+    .blob-2 {
+      bottom: 15%;
+      right: 10%;
+      width: 420px;
+      height: 420px;
+      background: radial-gradient(circle, #3B82F6 0%, rgba(59, 130, 246, 0) 70%);
+      animation: floatSlow 15s ease-in-out infinite alternate-reverse;
+    }
+
+    .blob-3 {
+      top: 40%;
+      right: 30%;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, #EC4899 0%, rgba(236, 72, 153, 0) 70%);
+      opacity: 0.25;
+      animation: floatSlow 22s ease-in-out infinite alternate;
+    }
+
+    .hero-grid-pattern {
+      position: absolute;
+      inset: 0;
+      background-size: 40px 40px;
+      background-image: 
+        linear-gradient(to right, rgba(148, 163, 184, 0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(148, 163, 184, 0.05) 1px, transparent 1px);
+      mask-image: radial-gradient(circle at 50% 50%, black 40%, transparent 80%);
+      -webkit-mask-image: radial-gradient(circle at 50% 50%, black 40%, transparent 80%);
+    }
+
+    .hero-layout {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      align-items: center;
+      gap: 3.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Left Hero Content */
+    .hero-badge-wrap {
+      margin-bottom: 1.25rem;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.45rem 1rem;
+      border-radius: var(--radius-full);
+      background: var(--badge-bg);
+      border: 1px solid var(--border);
+      color: var(--accent-secondary);
+      font-size: 0.875rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: var(--success);
+      box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+      animation: pulseGreen 2s infinite;
+    }
+
+    .hero-heading {
+      font-size: clamp(2.75rem, 6vw, 4.5rem);
+      font-weight: 900;
+      letter-spacing: -0.035em;
+      line-height: 1.08;
+      margin-bottom: 1.25rem;
+      text-transform: lowercase;
+      color: var(--text-primary);
+    }
+
+    .hero-heading .gradient-text {
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
+
+    .hero-bio {
+      font-size: clamp(1rem, 1.8vw, 1.1875rem);
+      color: var(--text-secondary);
+      max-width: 540px;
+      line-height: 1.7;
+      margin-bottom: 2.25rem;
+    }
+
+    .hero-cta-group {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      padding: 0.85rem 1.75rem;
+      border-radius: var(--radius-md);
+      font-size: 0.9375rem;
+      font-weight: 600;
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast), border-color var(--transition-fast);
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: var(--accent-gradient);
+      color: #FFFFFF;
+      box-shadow: 0 8px 24px var(--accent-glow);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(124, 58, 237, 0.4);
+    }
+
+    .btn-primary svg {
+      transition: transform var(--transition-fast);
+    }
+
+    .btn-primary:hover svg {
+      transform: translateX(3px);
+    }
+
+    .btn-secondary {
+      background: var(--bg-card);
+      color: var(--text-primary);
+      border: 1px solid var(--border);
+      box-shadow: var(--card-shadow);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--accent-secondary);
+      transform: translateY(-2px);
+      color: var(--accent-secondary);
+    }
+
+    /* Right Hero Visual / Avatar Card */
+    .hero-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .avatar-card {
+      width: 100%;
+      max-width: 380px;
+      background: var(--card-glass);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2.25rem 2rem;
+      box-shadow: var(--card-shadow);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      animation: avatarFloat 6s ease-in-out infinite alternate;
+      transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+    }
+
+    .avatar-card:hover {
+      border-color: var(--accent-secondary);
+      box-shadow: var(--card-shadow-hover);
+    }
+
+    .avatar-wrapper {
+      position: relative;
+      width: 180px;
+      height: 180px;
+      margin-bottom: 1.5rem;
+    }
+
+    .avatar-glow-ring {
+      position: absolute;
+      inset: -6px;
+      border-radius: 50%;
+      background: var(--accent-gradient);
+      opacity: 0.75;
+      filter: blur(8px);
+      animation: pulseGlow 4s ease-in-out infinite alternate;
+    }
+
+    .avatar-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: linear-gradient(145deg, #1A2338 0%, #0F172A 100%);
+      border: 2px solid rgba(167, 139, 250, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    [data-theme="light"] .avatar-inner {
+      background: linear-gradient(145deg, #EEF2FF 0%, #E0E7FF 100%);
+      border-color: rgba(109, 40, 217, 0.3);
+    }
+
+    .avatar-svg {
+      width: 82%;
+      height: 82%;
+    }
+
+    .avatar-badge-status {
+      position: absolute;
+      bottom: 6px;
+      right: 6px;
+      width: 26px;
+      height: 26px;
+      background: var(--bg-card);
+      border: 2px solid var(--bg-primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .avatar-meta {
+      text-align: center;
+      width: 100%;
+    }
+
+    .avatar-name {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 0.25rem;
+      text-transform: lowercase;
+    }
+
+    .avatar-role {
+      font-size: 0.875rem;
+      color: var(--accent-secondary);
+      font-weight: 500;
+      margin-bottom: 1.25rem;
+    }
+
+    .avatar-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: center;
+    }
+
+    .tech-pill {
+      font-size: 0.75rem;
+      font-weight: 600;
+      font-family: var(--font-mono);
+      padding: 0.25rem 0.65rem;
+      border-radius: var(--radius-full);
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    /* Floating micro chip badges around avatar */
+    .float-chip {
+      position: absolute;
+      background: var(--card-glass);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 0.6rem 0.9rem;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      z-index: 2;
+      animation: floatMicro 5s ease-in-out infinite alternate;
+    }
+
+    .chip-top-left {
+      top: -12px;
+      left: -20px;
+      animation-delay: -1.5s;
+    }
+
+    .chip-bottom-right {
+      bottom: -15px;
+      right: -15px;
+      animation-delay: -3s;
+    }
+
+    .chip-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: var(--badge-bg);
+      color: var(--accent-secondary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ==========================================================================
+       5. ABOUT SECTION
+       ========================================================================== */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 3.5rem;
+      align-items: center;
+    }
+
+    .about-illustration-wrap {
+      position: relative;
+    }
+
+    .about-card-graphic {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2.25rem;
+      position: relative;
+      box-shadow: var(--card-shadow);
+      overflow: hidden;
+    }
+
+    .graphic-header {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .graphic-dot {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+    }
+    .graphic-dot.red { background: #EF4444; }
+    .graphic-dot.yellow { background: #F59E0B; }
+    .graphic-dot.green { background: #10B981; }
+
+    .graphic-header-title {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      margin-left: auto;
+    }
+
+    .code-preview {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      line-height: 1.7;
+      color: var(--text-secondary);
+    }
+
+    .code-preview .keyword { color: #EC4899; }
+    .code-preview .class-name { color: #60A5FA; }
+    .code-preview .string { color: #34D399; }
+    .code-preview .property { color: var(--accent-secondary); }
+
+    .about-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .stat-mini-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--accent-secondary);
+      line-height: 1.2;
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      margin-top: 0.25rem;
+    }
+
+    .about-content {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .about-bio {
+      font-size: 1.125rem;
+      line-height: 1.8;
+      color: var(--text-secondary);
+    }
+
+    .highlighted-statement {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      background: var(--badge-bg);
+      border-left: 4px solid var(--accent);
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      padding: 1.25rem 1.5rem;
+      margin: 0.75rem 0;
+    }
+
+    .highlight-icon {
+      color: var(--accent-secondary);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .highlight-text {
+      font-size: 1.0625rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.5;
+    }
+
+    .about-highlights-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.85rem;
+      margin-top: 0.5rem;
+    }
+
+    .highlight-item {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.9375rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+
+    .highlight-check {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--success);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    /* ==========================================================================
+       6. EDUCATION SECTION
+       ========================================================================== */
+    .education-container {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .education-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2.75rem;
+      box-shadow: var(--card-shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .education-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--accent-gradient);
+    }
+
+    .edu-main-grid {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 1.75rem;
+      align-items: start;
+      margin-bottom: 2.5rem;
+    }
+
+    .edu-icon-badge {
+      width: 64px;
+      height: 64px;
+      border-radius: var(--radius-md);
+      background: var(--badge-bg);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-secondary);
+    }
+
+    .edu-header-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .edu-degree {
+      font-size: 1.625rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      letter-spacing: -0.01em;
+    }
+
+    .edu-university {
+      font-size: 1.0625rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .edu-branch {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+    }
+
+    .edu-gpa-badge {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: var(--badge-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 0.75rem 1.25rem;
+      text-align: center;
+    }
+
+    .gpa-val {
+      font-size: 1.625rem;
+      font-weight: 800;
+      color: var(--accent-secondary);
+      line-height: 1.1;
+    }
+
+    .gpa-label {
+      font-size: 0.6875rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-secondary);
+    }
+
+    /* Stepper Timeline */
+    .edu-timeline-block {
+      border-top: 1px solid var(--border);
+      padding-top: 2rem;
+    }
+
+    .timeline-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.75rem;
+    }
+
+    .timeline-title-text {
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+
+    .timeline-range-badge {
+      font-family: var(--font-mono);
+      font-size: 0.8125rem;
+      font-weight: 600;
+      padding: 0.25rem 0.75rem;
+      border-radius: var(--radius-full);
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+    }
+
+    .stepper-container {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      position: relative;
+      margin-top: 1rem;
+    }
+
+    .stepper-track-line {
+      position: absolute;
+      top: 18px;
+      left: 10%;
+      right: 10%;
+      height: 3px;
+      background: var(--border);
+      z-index: 1;
+    }
+
+    .stepper-track-progress {
+      position: absolute;
+      top: 18px;
+      left: 10%;
+      width: 50%;
+      height: 3px;
+      background: var(--accent-gradient);
+      z-index: 2;
+    }
+
+    .step-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      z-index: 3;
+      text-align: center;
+    }
+
+    .step-node {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--bg-card);
+      border: 2px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8125rem;
+      font-weight: 700;
+      color: var(--text-secondary);
+      margin-bottom: 0.75rem;
+      transition: all var(--transition-fast);
+    }
+
+    .step-item.completed .step-node {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #FFFFFF;
+    }
+
+    .step-item.current .step-node {
+      background: var(--bg-card);
+      border: 3px solid var(--accent);
+      color: var(--accent-secondary);
+      box-shadow: 0 0 0 6px var(--accent-glow);
+    }
+
+    .step-year {
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 0.25rem;
+    }
+
+    .step-status {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    .step-item.current .step-status {
+      color: var(--accent-secondary);
+      font-weight: 700;
+      background: var(--badge-bg);
+      padding: 0.2rem 0.5rem;
+      border-radius: var(--radius-full);
+      border: 1px solid var(--border);
+    }
+
+    /* ==========================================================================
+       7. SKILLS SECTION
+       ========================================================================== */
+    .skills-groups-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 1.75rem;
+    }
+
+    .skill-group-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
+      box-shadow: var(--card-shadow);
+      transition: transform var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .skill-group-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent-secondary);
+      box-shadow: var(--card-shadow-hover);
+    }
+
+    .group-header {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .group-icon-box {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-sm);
+      background: var(--badge-bg);
+      color: var(--accent-secondary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .group-title {
+      font-size: 1.1875rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .skills-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(135px, 1fr));
+      gap: 0.75rem;
+    }
+
+    .skill-pill {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 0.65rem 0.85rem;
+      font-size: 0.84rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      transition: all var(--transition-fast);
+      cursor: default;
+    }
+
+    .skill-pill:hover {
+      background: var(--badge-bg);
+      border-color: var(--accent-secondary);
+      color: var(--accent-secondary);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px var(--accent-glow);
+    }
+
+    .skill-icon {
+      color: var(--accent-secondary);
+      width: 18px;
+      height: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ==========================================================================
+       8. WORK EXPERIENCE SECTION
+       ========================================================================== */
+    .experience-container {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .timeline-wrapper {
+      position: relative;
+      padding-left: 2.25rem;
+    }
+
+    .timeline-vertical-line {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 10px;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--accent) 0%, var(--border) 100%);
+    }
+
+    .experience-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2.25rem;
+      box-shadow: var(--card-shadow);
+      position: relative;
+      transition: transform var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+    }
+
+    .experience-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--accent-secondary);
+      box-shadow: var(--card-shadow-hover);
+    }
+
+    .timeline-marker-dot {
+      position: absolute;
+      top: 2rem;
+      left: -2.25rem;
+      transform: translateX(-5px);
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--bg-card);
+      border: 3px solid var(--accent);
+      box-shadow: 0 0 0 5px var(--accent-glow);
+      z-index: 2;
+    }
+
+    .exp-header-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .exp-title-box {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .exp-position {
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: var(--text-primary);
+    }
+
+    .exp-type-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: var(--accent-secondary);
+    }
+
+    .exp-date-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--badge-bg);
+      border: 1px solid var(--border);
+      padding: 0.4rem 0.9rem;
+      border-radius: var(--radius-full);
+      font-size: 0.8125rem;
+      font-family: var(--font-mono);
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .exp-description {
+      font-size: 1.0625rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin: 1.25rem 0 1.75rem 0;
+    }
+
+    .exp-tags-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ==========================================================================
+       9. OFFERED SERVICES SECTION
+       ========================================================================== */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+    }
+
+    .service-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem;
+      box-shadow: var(--card-shadow);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: transform var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+      overflow: hidden;
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: transparent;
+      transition: background var(--transition-normal);
+    }
+
+    .service-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--accent-secondary);
+      box-shadow: var(--card-shadow-hover);
+    }
+
+    .service-card:hover::before {
+      background: var(--accent-gradient);
+    }
+
+    .service-icon-box {
+      width: 58px;
+      height: 58px;
+      border-radius: var(--radius-md);
+      background: var(--badge-bg);
+      border: 1px solid var(--border);
+      color: var(--accent-secondary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      transition: transform var(--transition-fast), background-color var(--transition-fast);
+    }
+
+    .service-card:hover .service-icon-box {
+      transform: scale(1.05);
+      background: var(--accent);
+      color: #FFFFFF;
+    }
+
+    .service-title {
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: 1rem;
+    }
+
+    .service-description {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 2rem;
+      flex-grow: 1;
+    }
+
+    .service-tags-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    /* ==========================================================================
+       10. PROJECTS SECTION
+       ========================================================================== */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 1.75rem;
+    }
+
+    .project-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
+      box-shadow: var(--card-shadow);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: transform var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+    }
+
+    .project-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent-secondary);
+      box-shadow: var(--card-shadow-hover);
+    }
+
+    .project-top-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.25rem;
+    }
+
+    .project-folder-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-sm);
+      background: var(--badge-bg);
+      color: var(--accent-secondary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .coming-soon-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--accent-secondary);
+      background: var(--badge-bg);
+      border: 1px solid var(--border);
+      padding: 0.25rem 0.65rem;
+      border-radius: var(--radius-full);
+    }
+
+    .project-title {
+      font-size: 1.25rem;
+      font-weight: 750;
+      color: var(--text-primary);
+      margin-bottom: 0.75rem;
+    }
+
+    .project-desc {
+      font-size: 0.9375rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+      flex-grow: 1;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .project-footer {
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .btn-project {
+      width: 100%;
+      padding: 0.65rem 1rem;
+      border-radius: var(--radius-md);
+      font-size: 0.875rem;
+      font-weight: 600;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transition: all var(--transition-fast);
+    }
+
+    .btn-project:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #FFFFFF;
+    }
+
+    .btn-project svg {
+      transition: transform var(--transition-fast);
+    }
+
+    .btn-project:hover svg {
+      transform: translateX(3px);
+    }
+
+    /* ==========================================================================
+       11. ACHIEVEMENTS SECTION
+       ========================================================================== */
+    .achievements-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .achievement-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.85rem;
+      box-shadow: var(--card-shadow);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: transform var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+    }
+
+    .achievement-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent-secondary);
+      box-shadow: var(--card-shadow-hover);
+    }
+
+    .achievement-icon-box {
+      width: 50px;
+      height: 50px;
+      border-radius: var(--radius-md);
+      background: var(--badge-bg);
+      border: 1px solid var(--border);
+      color: var(--accent-secondary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.25rem;
+      transition: transform var(--transition-fast);
+    }
+
+    .achievement-card:hover .achievement-icon-box {
+      transform: scale(1.08) rotate(3deg);
+      background: var(--accent);
+      color: #FFFFFF;
+    }
+
+    .achievement-title {
+      font-size: 1.1875rem;
+      font-weight: 750;
+      color: var(--text-primary);
+      margin-bottom: 0.6rem;
+    }
+
+    .achievement-text {
+      font-size: 0.9375rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* ==========================================================================
+       12. FEEDBACK SECTION (TESTIMONIALS PLACEHOLDERS)
+       ========================================================================== */
+    .feedback-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+      gap: 1.75rem;
+    }
+
+    .feedback-card {
+      background: var(--bg-card);
+      border: 1px dashed var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2.25rem;
+      box-shadow: var(--card-shadow);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: transform var(--transition-fast), border-color var(--transition-fast);
+    }
+
+    .feedback-card:hover {
+      border-color: var(--accent-secondary);
+      border-style: solid;
+      transform: translateY(-4px);
+    }
+
+    .feedback-quote-icon {
+      color: var(--accent-secondary);
+      opacity: 0.6;
+      margin-bottom: 1rem;
+    }
+
+    .feedback-text {
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 1.75rem;
+      flex-grow: 1;
+    }
+
+    .feedback-author {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .feedback-avatar-placeholder {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--badge-bg);
+      border: 1px solid var(--border);
+      color: var(--accent-secondary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.875rem;
+    }
+
+    .feedback-author-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .feedback-name {
+      font-size: 0.9375rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .feedback-role {
+      font-size: 0.8125rem;
+      color: var(--text-secondary);
+    }
+
+    /* ==========================================================================
+       13. GET IN TOUCH (CONTACT SECTION)
+       ========================================================================== */
+    .contact-card-outer {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--card-shadow);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+    }
+
+    .contact-info-side {
+      padding: 3.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .contact-headline {
+      font-size: clamp(1.85rem, 3.5vw, 2.5rem);
+      font-weight: 850;
+      color: var(--text-primary);
+      line-height: 1.2;
+      margin-bottom: 0.85rem;
+    }
+
+    .contact-subtext {
+      font-size: 1.0625rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 2.5rem;
+      max-width: 480px;
+    }
+
+    .contact-methods-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.85rem 1rem;
+      border-radius: var(--radius-md);
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      transition: all var(--transition-fast);
+    }
+
+    .contact-item:hover {
+      border-color: var(--accent-secondary);
+      transform: translateX(4px);
+    }
+
+    .contact-icon-box {
+      width: 42px;
+      height: 42px;
+      border-radius: var(--radius-sm);
+      background: var(--badge-bg);
+      color: var(--accent-secondary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .contact-details {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .contact-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-secondary);
+    }
+
+    .contact-val {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      word-break: break-all;
+    }
+
+    /* Social Placeholders */
+    .contact-social-placeholders {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .social-placeholder-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.65rem 1rem;
+      border-radius: var(--radius-md);
+      background: var(--bg-secondary);
+      border: 1px dashed var(--border);
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      transition: all var(--transition-fast);
+    }
+
+    .social-placeholder-bar:hover {
+      border-color: var(--accent-secondary);
+      color: var(--text-primary);
+    }
+
+    .placeholder-badge {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      padding: 0.15rem 0.5rem;
+      border-radius: var(--radius-full);
+      background: var(--badge-bg);
+      color: var(--accent-secondary);
+    }
+
+    /* Contact Action / Form Side */
+    .contact-action-side {
+      background: var(--bg-secondary);
+      border-left: 1px solid var(--border);
+      padding: 3.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .action-card-inner {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 2.25rem;
+      box-shadow: var(--card-shadow);
+    }
+
+    .action-card-title {
+      font-size: 1.35rem;
+      font-weight: 750;
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .action-card-desc {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      margin-bottom: 1.75rem;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.15rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .form-label {
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .form-input,
+    .form-textarea {
+      width: 100%;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 0.75rem 1rem;
+      font-size: 0.9375rem;
+      color: var(--text-primary);
+      font-family: inherit;
+      transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+    }
+
+    .form-textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .form-input:focus,
+    .form-textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-glow);
+    }
+
+    .btn-message-me {
+      width: 100%;
+      padding: 0.95rem;
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    /* ==========================================================================
+       14. FOOTER
+       ========================================================================== */
+    .site-footer {
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border);
+      padding: 3.5rem 0 2rem 0;
+      position: relative;
+    }
+
+    .footer-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .footer-brand {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .footer-brand-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      text-transform: lowercase;
+    }
+
+    .footer-brand-desc {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+    }
+
+    .footer-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      list-style: none;
+    }
+
+    .footer-nav-link {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      transition: color var(--transition-fast);
+    }
+
+    .footer-nav-link:hover {
+      color: var(--accent-secondary);
+    }
+
+    .footer-social-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .social-icon-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: var(--radius-sm);
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all var(--transition-fast);
+    }
+
+    .social-icon-btn:hover {
+      color: var(--accent-secondary);
+      border-color: var(--accent-secondary);
+      transform: translateY(-2px);
+    }
+
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+    }
+
+    /* Back To Top Floating Button */
+    .back-to-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--accent-gradient);
+      color: #FFFFFF;
+      box-shadow: 0 4px 16px var(--accent-glow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 900;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(12px);
+      transition: opacity var(--transition-normal), visibility var(--transition-normal), transform var(--transition-normal);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .back-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .back-to-top:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 22px rgba(124, 58, 237, 0.45);
+    }
+
+    /* Toast Notification for Interactive Feedback */
+    .toast-container {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: var(--bg-card);
+      color: var(--text-primary);
+      border: 1px solid var(--accent-secondary);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+      padding: 0.85rem 1.5rem;
+      border-radius: var(--radius-full);
+      font-size: 0.9375rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      z-index: 2000;
+      opacity: 0;
+      pointer-events: none;
+      transition: transform var(--transition-normal), opacity var(--transition-normal);
+    }
+
+    .toast-container.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* ==========================================================================
+       15. SCROLL REVEAL ANIMATIONS (INTERSECTION OBSERVER)
+       ========================================================================== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+      will-change: opacity, transform;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Keyframe Animations */
+    @keyframes floatSlow {
+      0% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(30px, -20px) scale(1.08); }
+      100% { transform: translate(-20px, 30px) scale(0.95); }
+    }
+
+    @keyframes avatarFloat {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-12px); }
+    }
+
+    @keyframes floatMicro {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-8px); }
+    }
+
+    @keyframes pulseGlow {
+      0% { opacity: 0.5; filter: blur(6px); }
+      100% { opacity: 0.85; filter: blur(14px); }
+    }
+
+    @keyframes pulseGreen {
+      0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+      70% { box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+    }
+
+    /* ==========================================================================
+       16. RESPONSIVENESS & BREAKPOINTS
+       ========================================================================== */
+    @media (max-width: 1024px) {
+      .hero-layout {
+        grid-template-columns: 1fr;
+        gap: 3.5rem;
+        text-align: center;
+      }
+
+      .hero-badge-wrap {
+        display: flex;
+        justify-content: center;
+      }
+
+      .hero-bio {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .hero-cta-group {
+        justify-content: center;
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+
+      .contact-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-action-side {
+        border-left: none;
+        border-top: 1px solid var(--border);
+      }
+    }
+
+    @media (max-width: 868px) {
+      .nav-menu {
+        display: none;
+      }
+
+      .hamburger-btn {
+        display: flex;
+      }
+
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .edu-main-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+        justify-items: center;
+      }
+
+      .edu-branch {
+        justify-content: center;
+      }
+
+      .stepper-container {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        margin-top: 1.5rem;
+      }
+
+      .stepper-track-line,
+      .stepper-track-progress {
+        display: none;
+      }
+
+      .step-item {
+        flex-direction: row;
+        gap: 1.25rem;
+        text-align: left;
+      }
+
+      .step-node {
+        margin-bottom: 0;
+        flex-shrink: 0;
+      }
+
+      .contact-info-side,
+      .contact-action-side {
+        padding: 2.25rem 1.5rem;
+      }
+
+      .education-card {
+        padding: 2rem 1.5rem;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .section {
+        padding: 4.5rem 0;
+      }
+
+      .about-highlights-list {
+        grid-template-columns: 1fr;
+      }
+
+      .skills-groups-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .hero-cta-group {
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .timeline-wrapper {
+        padding-left: 1.5rem;
+      }
+
+      .timeline-marker-dot {
+        left: -1.5rem;
+      }
+
+      .exp-header-row {
+        flex-direction: column;
+      }
+
+      .footer-top {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .avatar-card {
+        padding: 1.75rem 1.25rem;
+      }
+      .float-chip {
+        display: none;
+      }
+    }
+
+    /* Accessibility: Reduced Motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+      .blob, .avatar-card, .float-chip, .pulse-dot {
+        animation: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================================================
+       HEADER & NAVIGATION
+       ========================================================================== -->
+  <header class="site-header" id="siteHeader">
+    <div class="container nav-container">
+      <!-- Brand Logo -->
+      <a href="#home" class="nav-brand" aria-label="Sandy Sameh Home">
+        <span class="brand-symbol">&lt;/&gt;</span>
+        <span>sandy sameh<span class="brand-dot">.</span></span>
+      </a>
+
+      <!-- Desktop Nav Items (Exact Requested Order) -->
+      <nav aria-label="Main Navigation">
+        <ul class="nav-menu">
+          <li><a href="#home" class="nav-link active">Home</a></li>
+          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#education" class="nav-link">Education</a></li>
+          <li><a href="#skills" class="nav-link">Skills</a></li>
+          <li><a href="#experience" class="nav-link">Work Experience</a></li>
+          <li><a href="#services" class="nav-link">Offered Services</a></li>
+          <li><a href="#projects" class="nav-link">Projects</a></li>
+          <li><a href="#achievements" class="nav-link">Achievements</a></li>
+          <li><a href="#feedback" class="nav-link">Feedback</a></li>
+          <li><a href="#contact" class="nav-link">Get in touch</a></li>
+        </ul>
+      </nav>
+
+      <!-- Nav Actions (Theme Toggle & Mobile Hamburger) -->
+      <div class="nav-actions">
+        <button class="theme-toggle-btn" id="themeToggleBtn" type="button" aria-label="Toggle dark/light theme" title="Toggle theme">
+          <!-- Sun Icon (for dark theme -> switch to light) -->
+          <svg class="theme-icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <!-- Moon Icon (for light theme -> switch to dark) -->
+          <svg class="theme-icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+
+        <button class="hamburger-btn" id="hamburgerBtn" type="button" aria-label="Toggle mobile menu" aria-expanded="false" aria-controls="mobileNavDrawer">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer & Backdrop -->
+  <div class="mobile-nav-backdrop" id="mobileNavBackdrop" aria-hidden="true"></div>
+  <aside class="mobile-nav-drawer" id="mobileNavDrawer" aria-label="Mobile Navigation Menu">
+    <ul class="mobile-menu">
+      <li><a href="#home" class="mobile-nav-link active">Home</a></li>
+      <li><a href="#about" class="mobile-nav-link">About</a></li>
+      <li><a href="#education" class="mobile-nav-link">Education</a></li>
+      <li><a href="#skills" class="mobile-nav-link">Skills</a></li>
+      <li><a href="#experience" class="mobile-nav-link">Work Experience</a></li>
+      <li><a href="#services" class="mobile-nav-link">Offered Services</a></li>
+      <li><a href="#projects" class="mobile-nav-link">Projects</a></li>
+      <li><a href="#achievements" class="mobile-nav-link">Achievements</a></li>
+      <li><a href="#feedback" class="mobile-nav-link">Feedback</a></li>
+      <li><a href="#contact" class="mobile-nav-link">Get in touch</a></li>
+    </ul>
+
+    <div class="mobile-drawer-footer">
+      <div style="font-size: 0.8125rem; color: var(--text-secondary);">
+        Computer Science Student &bull; AAST Aswan
+      </div>
+      <a href="mailto:sandysameh1113@gmail.com" class="btn btn-primary" style="padding: 0.75rem 1rem; width: 100%;">
+        Email Sandy
+      </a>
+    </div>
+  </aside>
+
+  <!-- ==========================================================================
+       MAIN CONTENT
+       ========================================================================== -->
+  <main>
+
+    <!-- ========================================================================
+         1. HOME (HERO SECTION)
+         ======================================================================== -->
+    <section id="home" class="hero-section">
+      <!-- Background Ambient Blobs and Grid -->
+      <div class="hero-bg" aria-hidden="true">
+        <div class="blob blob-1" id="blob1"></div>
+        <div class="blob blob-2" id="blob2"></div>
+        <div class="blob blob-3" id="blob3"></div>
+        <div class="hero-grid-pattern"></div>
+      </div>
+
+      <div class="container">
+        <div class="hero-layout">
+          <!-- Left Column -->
+          <div class="hero-content reveal active">
+            <div class="hero-badge-wrap">
+              <div class="hero-badge">
+                <span class="pulse-dot"></span>
+                <span>Computer Science Student</span>
+              </div>
+            </div>
+
+            <h1 class="hero-heading">
+              <span class="gradient-text">sandy sameh</span>
+            </h1>
+
+            <p class="hero-bio">
+              Computer Science student passionate about building practical digital solutions and growing as a Full-Stack .NET developer. I enjoy turning ideas into clean, useful, and interactive applications.
+            </p>
+
+            <div class="hero-cta-group">
+              <a href="#contact" class="btn btn-primary">
+                <span>Contact</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </a>
+
+              <a href="#projects" class="btn btn-secondary">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                  <polyline points="2 17 12 22 22 17"></polyline>
+                  <polyline points="2 12 12 17 22 12"></polyline>
+                </svg>
+                <span>View Projects</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Right Column: Abstract Developer Avatar Card -->
+          <div class="hero-visual reveal active">
+            <!-- Decorative Micro Floating Chips -->
+            <div class="float-chip chip-top-left" aria-hidden="true">
+              <div class="chip-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="16 18 22 12 16 6"></polyline>
+                  <polyline points="8 6 2 12 8 18"></polyline>
+                </svg>
+              </div>
+              <span>ASP.NET Core</span>
+            </div>
+
+            <div class="float-chip chip-bottom-right" aria-hidden="true">
+              <div class="chip-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                  <path d="M2 17l10 5 10-5"></path>
+                  <path d="M2 12l10 5 10-5"></path>
+                </svg>
+              </div>
+              <span>Frontend UI</span>
+            </div>
+
+            <div class="avatar-card">
+              <div class="avatar-wrapper">
+                <div class="avatar-glow-ring" aria-hidden="true"></div>
+                <div class="avatar-inner">
+                  <!-- Polished Abstract Developer Profile Illustration (Inline SVG) -->
+                 
+                  <img src="\lastportfolio\assets\image\photo_5918122243202420820_y.jpg" alt = "sandy sameh" width= "200" height = "200" >
+                    <circle cx="80" cy="80" r="76" fill="url(#avatarBgGrad)" />
+                    <!-- Background Code Grid Lines -->
+                    <path d="M30 65H55M105 65H130M35 95H50M110 95H125" stroke="var(--accent-secondary)" stroke-width="2" stroke-linecap="round" opacity="0.35"/>
+                    <!-- Shoulders & Torso -->
+                    <path d="M34 142C34 116 54 102 80 102C106 102 126 116 126 142" fill="url(#hoodieGrad)" />
+                    <!-- Collar / Zipper line -->
+                    <path d="M74 104L80 122L86 104" stroke="#94A3B8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <!-- Neck -->
+                    <rect x="71" y="86" width="18" height="20" rx="4" fill="#F8C4B4"/>
+                    <!-- Head & Face -->
+                    <ellipse cx="80" cy="68" rx="26" ry="30" fill="#FBD5C5"/>
+                    <!-- Hair -->
+                    <path d="M54 62C54 44 65 32 80 32C95 32 106 44 106 62C106 72 103 76 101 76C98 76 97 60 92 56C87 52 75 52 68 56C63 60 62 76 59 76C57 76 54 72 54 62Z" fill="#1E293B"/>
+                    <!-- Modern Glasses -->
+                    <rect x="62" y="62" width="15" height="11" rx="3" stroke="#7C3AED" stroke-width="2.5" fill="rgba(124, 58, 237, 0.15)"/>
+                    <rect x="83" y="62" width="15" height="11" rx="3" stroke="#7C3AED" stroke-width="2.5" fill="rgba(124, 58, 237, 0.15)"/>
+                    <line x1="77" y1="67" x2="83" y2="67" stroke="#7C3AED" stroke-width="2.5" stroke-linecap="round"/>
+                    <!-- Friendly Smile -->
+                    <path d="M74 85C77 88 83 88 86 85" stroke="#E11D48" stroke-width="2" stroke-linecap="round"/>
+                    <defs>
+                      <linearGradient id="avatarBgGrad" x1="10" y1="10" x2="150" y2="150" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#1E1B4B" />
+                        <stop offset="1" stop-color="#312E81" />
+                      </linearGradient>
+                      <linearGradient id="hoodieGrad" x1="40" y1="102" x2="120" y2="142" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#6D28D9" />
+                        <stop offset="1" stop-color="#4C1D95" />
+                      </linearGradient>
+                    </defs>
+                  </svg>
+                </div>
+                <div class="avatar-badge-status" title="Active & Available" aria-label="Status: Active">
+                  <span class="pulse-dot"></span>
+                </div>
+              </div>
+
+              <div class="avatar-meta">
+                <div class="avatar-name">sandy sameh</div>
+                <div class="avatar-role">Aspiring Full-Stack .NET Developer</div>
+                <div class="avatar-tags">
+                  <span class="tech-pill">C#</span>
+                  <span class="tech-pill">.NET</span>
+                  <span class="tech-pill">JavaScript</span>
+                  <span class="tech-pill">SQL</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         2. ABOUT
+         ======================================================================== -->
+    <section id="about" class="section">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-tag">Background</span>
+          <h2 class="section-title">About Me</h2>
+          <p class="section-subtitle">A glimpse into my journey, mindset, and development focus.</p>
+        </div>
+
+        <div class="about-grid">
+          <!-- Illustration / Code Graphic Side -->
+          <div class="about-illustration-wrap reveal">
+            <div class="about-card-graphic">
+              <div class="graphic-header">
+                <span class="graphic-dot red"></span>
+                <span class="graphic-dot yellow"></span>
+                <span class="graphic-dot green"></span>
+                <span class="graphic-header-title">DeveloperProfile.cs</span>
+              </div>
+           
+                      <img src="\lastportfolio\assets\image\photo_5918122243202420820_y.jpg" alt = "sandy sameh" width= "400" height = "400" >
+
+    
+}</code></pre>
+
+              <div class="about-stats-grid">
+                <div class="stat-mini-card">
+                  <div class="stat-number">3.82</div>
+                  <div class="stat-label">Cumulative GPA</div>
+                </div>
+                <div class="stat-mini-card">
+                  <div class="stat-number">3rd Year</div>
+                  <div class="stat-label">Academic Standing</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Text Bio Side -->
+          <div class="about-content reveal">
+            <p class="about-bio">
+              I'm a Computer Science student currently in my third year, with a strong interest in Full-Stack Development. I enjoy learning by building real projects and turning ideas into practical applications. I'm currently developing my skills in frontend development and the .NET ecosystem, with a focus on writing clean, useful, and user-friendly solutions.
+            </p>
+
+            <!-- Highlighted statement -->
+            <div class="highlighted-statement">
+              <svg class="highlight-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M12 16v-4"></path>
+                <path d="M12 8h.01"></path>
+              </svg>
+              <div class="highlight-text">
+                "Learning by building. Growing through real projects."
+              </div>
+            </div>
+
+            <div class="about-highlights-list">
+              <div class="highlight-item">
+                <span class="highlight-check">✓</span>
+                <span>Clean & Maintainable Code</span>
+              </div>
+              <div class="highlight-item">
+                <span class="highlight-check">✓</span>
+                <span>Responsive Design Mindset</span>
+              </div>
+              <div class="highlight-item">
+                <span class="highlight-check">✓</span>
+                <span>.NET Backend Architecture</span>
+              </div>
+              <div class="highlight-item">
+                <span class="highlight-check">✓</span>
+                <span>Problem Solving & Algorithms</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         3. EDUCATION
+         ======================================================================== -->
+    <section id="education" class="section">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-tag">Academic Foundation</span>
+          <h2 class="section-title">Education</h2>
+          <p class="section-subtitle">Academic milestones, degree details, and active progress.</p>
+        </div>
+
+        <div class="education-container reveal">
+          <div class="education-card">
+            <!-- Degree & University Meta -->
+            <div class="edu-main-grid">
+              <div class="edu-icon-badge" aria-hidden="true">
+                <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+                  <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+                </svg>
+              </div>
+
+              <div class="edu-header-info">
+                <h3 class="edu-degree">Computer Science</h3>
+                <div class="edu-university">
+                  Arab Academy for Science, Technology &amp; Maritime Transport (AAST)
+                </div>
+                <div class="edu-branch">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                    <circle cx="12" cy="10" r="3"></circle>
+                  </svg>
+                  <span>Branch: Aswan</span>
+                </div>
+              </div>
+
+              <div class="edu-gpa-badge">
+                <div class="gpa-val">3.82</div>
+                <div class="gpa-label">Cumulative GPA</div>
+              </div>
+            </div>
+
+            <!-- Stepper Timeline: 2024 -> 2025 -> 2026 -> 2027 -> 2028 -->
+            <div class="edu-timeline-block">
+              <div class="timeline-title-row">
+                <span class="timeline-title-text">Degree Progression Roadmap</span>
+                <span class="timeline-range-badge">2024 — 2028</span>
+              </div>
+
+              <div class="stepper-container">
+                <div class="stepper-track-line" aria-hidden="true"></div>
+                <div class="stepper-track-progress" aria-hidden="true"></div>
+
+                <!-- 2024 -->
+                <div class="step-item completed">
+                  <div class="step-node" aria-label="Year 2024 Completed">✓</div>
+                  <div class="step-year">2024</div>
+                  <div class="step-status">First Year</div>
+                </div>
+
+                <!-- 2025 -->
+                <div class="step-item completed">
+                  <div class="step-node" aria-label="Year 2025 Completed">✓</div>
+                  <div class="step-year">2025</div>
+                  <div class="step-status">Second Year</div>
+                </div>
+
+                <!-- 2026 (Current) -->
+                <div class="step-item current">
+                  <div class="step-node" aria-label="Year 2026 Current">3</div>
+                  <div class="step-year">2026</div>
+                  <div class="step-status">Third Year • Current</div>
+                </div>
+
+                <!-- 2027 -->
+                <div class="step-item">
+                  <div class="step-node" aria-label="Year 2027 Upcoming">4</div>
+                  <div class="step-year">2027</div>
+                  <div class="step-status">Fourth Year</div>
+                </div>
+
+                <!-- 2028 -->
+                <div class="step-item">
+                  <div class="step-node" aria-label="Year 2028 Graduation">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                    </svg>
+                  </div>
+                  <div class="step-year">2028</div>
+                  <div class="step-status">Graduation</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         4. SKILLS
+         ======================================================================== -->
+    <section id="skills" class="section">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-tag">Technical Toolkit</span>
+          <h2 class="section-title">Skills</h2>
+          <p class="section-subtitle">Structured core competencies across engineering, languages, and tools.</p>
+        </div>
+
+        <div class="skills-groups-grid">
+
+          <!-- Group 1: Frontend -->
+          <div class="skill-group-card reveal">
+            <div class="group-header">
+              <div class="group-icon-box" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                  <line x1="8" y1="21" x2="16" y2="21"></line>
+                  <line x1="12" y1="17" x2="12" y2="21"></line>
+                </svg>
+              </div>
+              <h3 class="group-title">Frontend</h3>
+            </div>
+
+            <div class="skills-list">
+              <!-- HTML -->
+              <div class="skill-pill">
+                <span class="skill-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 3l1.5 16L12 22l6.5-3L20 3H4z"/><path d="M8 8h8M8 12h7M9 16l3 1 3-1"/></svg>
+                </span>
+                <span>HTML</span>
+              </div>
+
+              <!-- CSS -->
+              <div class="skill-pill">
+                <span class="skill-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+                </span>
+                <span>CSS</span>
+              </div>
+
+              <!-- JavaScript -->
+              <div class="skill-pill">
+                <span class="skill-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 16c1 1 2 1 2-2V9M14 9h2c1.5 0 2 1 2 2.5s-1.5 2-2 2h-1l3 3.5"/></svg>
+                </span>
+                <span>JavaScript</span>
+              </div>
+
+              <!-- Responsive Design -->
+              <div class="skill-pill">
+                <span class="skill-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="14" height="12" rx="2"/><rect x="18" y="8" width="4" height="8" rx="1"/></svg>
+                </span>
+                <span>Responsive Design</span>
+              </div>
+
+              <!-- Figma -->
+              <div class="skill-pill">
+                <span class="skill-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 5.5A3.5 3.5 0 0 1 8.5 2H12v7H8.5A3.5 3.5 0 0 1 5 5.5z"/><path d="M12 2h3.5a3.5 3.5 0 1 1 0 7H12V2z"/><path d="M12 12.5a3.5 3.5 0 1 1 7 0 3.5 3.5 0 1 1-7 0z"/><path d="M5 19.5A3.5 3.5 0 0 1 8.5 16H12v3.5a3.5 3.5 0 1 1-7 0z"/><path d="M5 12.5A3.5 3.5 0 0 1 8.5 9H12v7H8.5A3.5 3.5 0 0 1 5 12.5z"/></svg>
+                </span>
+                <span>Figma</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Group 2: Programming -->
+          <div class="skill-group-card reveal">
+            <div class="group-header">
+              <div class="group-icon-box" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="16 18 22 12 16 6"></polyline>
+                  <polyline points="8 6 2 12 8 18"></polyline>
+                </svg>
+              </div>
+              <h3 class="group-title">Programming</h3>
+            </div>
+
+            <div class="skills-list">
+              <!-- C++ -->
+              <div class="skill-pill">
+                <span class="skill-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 16a5 5 0 1 1 0-8"/><path d="M15 10v4M13 12h4"/><path d="M20 10v4M18 12h4"/></svg>
+                </span>
+                <span>C++</span>
+              </div>
+
+              <!-- C# -->
+              <div class="skill-pill">
+                <span class="skill-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 16a5 5 0 1 1 0-8"/><path d="M15 9l-1 6M19 9l-1 6M13.5 11h6M12.5 14h6"/></svg>
+                </span>
+                <span>C#</span>
+              </div>
+
+              <!-- Java -->
+              <div class="skill-pill">
+                <span class="skill-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+                </span>
+                <span>Java</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Group 3: Backend & .NET -->
+          <div class="skill-group-card reveal">
+            <div class="group-header">
+              <div class="group-icon-box" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
+                  <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
+                  <line x1="6" y1="6" x2="6.01" y2="6"></line>
+                  <line x1="6" y1="18" x2="6.01" y2="18"></line>
+                </svg>
+              </div>
+              <h3 class="group-title">Backend &amp; .NET</h3>
+            </div>
+
+            <div class="skills-list">
+              <!-- .NET -->
+              <div class="skill-pill">
+                <span class="skill-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12h8M12 8v8"/></svg>
+                </span>
+                <span>.NET</span>
+              </div>
+
+              <!-- ASP.NET -->
+              <div class="skill-pill">
+                <span class="skill-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                </span>
+                <span>ASP.NET</span>
+              </div>
+
+              <!-- REST APIs -->
+              <div class="skill-pill">
+                <span class="skill-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/><polyline points="13 14 16 11 19 14"/></svg>
+                </span>
+                <span>REST APIs</span>
+              </div>
+
+              <!-- Full-Stack Development -->
+              <div class="skill-pill">
+                <span class="skill-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+                </span>
+                <span>Full-Stack Development</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Group 4: Databases -->
+          <div class="skill-group-card reveal">
+            <div class="group-header">
+              <div class="group-icon-box" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+                  <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+                  <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+                </svg>
+              </div>
+              <h3 class="group-title">Databases</h3>
+            </div>
+
+            <div class="skills-list">
+              <!-- SQL -->
+              <div class="skill-pill">
+                <span class="skill-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+                </span>
+                <span>SQL</span>
+              </div>
+
+              <!-- SQL Server -->
+              <div class="skill-pill">
+                <span class="skill-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9z"/><path d="M4 12h5M15 12h5"/></svg>
+                </span>
+                <span>SQL Server</span>
+              </div>
+
+              <!-- Database Design -->
+              <div class="skill-pill">
+                <span class="skill-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><path d="M10 6.5h4M6.5 10v7h7.5"/></svg>
+                </span>
+                <span>Database Design</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Group 5: Computer Science -->
+          <div class="skill-group-card reveal">
+            <div class="group-header">
+              <div class="group-icon-box" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M18 20a6 6 0 0 0-12 0"/>
+                  <circle cx="12" cy="10" r="4"/>
+                  <circle cx="12" cy="12" r="10"/>
+                </svg>
+              </div>
+              <h3 class="group-title">Computer Science</h3>
+            </div>
+
+            <div class="skills-list">
+              <!-- Data Structures -->
+              <div class="skill-pill">
+                <span class="skill-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="3"/><circle cx="6" cy="19" r="3"/><circle cx="18" cy="19" r="3"/><line x1="12" y1="8" x2="6" y2="16"/><line x1="12" y1="8" x2="18" y2="16"/></svg>
+                </span>
+                <span>Data Structures</span>
+              </div>
+
+              <!-- Algorithms -->
+              <div class="skill-pill">
+                <span class="skill-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="12" r="3"/><line x1="8.5" y1="7.5" x2="15.5" y2="10.5"/><line x1="8.5" y1="16.5" x2="15.5" y2="13.5"/></svg>
+                </span>
+                <span>Algorithms</span>
+              </div>
+
+              <!-- OOP -->
+              <div class="skill-pill">
+                <span class="skill-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+                </span>
+                <span>OOP</span>
+              </div>
+
+              <!-- Problem Solving -->
+              <div class="skill-pill">
+                <span class="skill-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                </span>
+                <span>Problem Solving</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Group 6: Tools -->
+          <div class="skill-group-card reveal">
+            <div class="group-header">
+              <div class="group-icon-box" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
+                </svg>
+              </div>
+              <h3 class="group-title">Tools</h3>
+            </div>
+
+            <div class="skills-list">
+              <!-- Git -->
+              <div class="skill-pill">
+                <span class="skill-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="6" y1="9" x2="6" y2="15"/><path d="M18 15a9 9 0 0 0-9-9"/></svg>
+                </span>
+                <span>Git</span>
+              </div>
+
+              <!-- GitHub -->
+              <div class="skill-pill">
+                <span class="skill-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                </span>
+                <span>GitHub</span>
+              </div>
+
+              <!-- Visual Studio -->
+              <div class="skill-pill">
+                <span class="skill-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"/><line x1="12" y1="22" x2="12" y2="15.5"/><polyline points="22 8.5 12 15.5 2 8.5"/></svg>
+                </span>
+                <span>Visual Studio</span>
+              </div>
+
+              <!-- VS Code -->
+              <div class="skill-pill">
+                <span class="skill-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16.5 3.5L7 12l9.5 8.5L21 17V7z"/><polyline points="7 12 3 9 3 15 7 12"/></svg>
+                </span>
+                <span>VS Code</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         5. WORK EXPERIENCE
+         ======================================================================== -->
+    <section id="experience" class="section">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-tag">Career Pathway</span>
+          <h2 class="section-title">Work Experience</h2>
+          <p class="section-subtitle">Practical development training, track specializations, and hands-on milestones.</p>
+        </div>
+
+        <div class="experience-container reveal">
+          <div class="timeline-wrapper">
+            <div class="timeline-vertical-line" aria-hidden="true"></div>
+
+            <article class="experience-card">
+              <div class="timeline-marker-dot" aria-hidden="true"></div>
+
+              <div class="exp-header-row">
+                <div class="exp-title-box">
+                  <h3 class="exp-position">Full-Stack .NET Track</h3>
+                  <div class="exp-type-badge">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                      <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                    </svg>
+                    <span>Training / Professional Development</span>
+                  </div>
+                </div>
+
+                <div class="exp-date-pill">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                  </svg>
+                  <span>August 2026 → December 2027</span>
+                </div>
+              </div>
+
+              <p class="exp-description">
+                Developing practical full-stack development skills through hands-on work with frontend technologies, C#, .NET, databases, APIs, and application development.
+              </p>
+
+              <div class="exp-tags-row">
+                <span class="tech-pill">HTML</span>
+                <span class="tech-pill">CSS</span>
+                <span class="tech-pill">JavaScript</span>
+                <span class="tech-pill">C#</span>
+                <span class="tech-pill">.NET</span>
+                <span class="tech-pill">SQL</span>
+                <span class="tech-pill">Git</span>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         6. OFFERED SERVICES
+         ======================================================================== -->
+    <section id="services" class="section">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-tag">Specializations</span>
+          <h2 class="section-title">Offered Services</h2>
+          <p class="section-subtitle">Practical digital capabilities and engineering solutions I deliver.</p>
+        </div>
+
+        <div class="services-grid">
+          <!-- SERVICE 1 -->
+          <article class="service-card reveal">
+            <div class="service-icon-box" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                <line x1="8" y1="21" x2="16" y2="21"></line>
+                <line x1="12" y1="17" x2="12" y2="21"></line>
+              </svg>
+            </div>
+
+            <h3 class="service-title">Front End Development</h3>
+
+            <p class="service-description">
+              Building responsive, modern, and user-friendly interfaces with clean layouts, smooth interactions, and responsive behavior across desktop, tablet, and mobile devices.
+            </p>
+
+            <div class="service-tags-wrap">
+              <span class="tech-pill">HTML</span>
+              <span class="tech-pill">CSS</span>
+              <span class="tech-pill">JavaScript</span>
+              <span class="tech-pill">Responsive Design</span>
+              <span class="tech-pill">UI Implementation</span>
+            </div>
+          </article>
+
+          <!-- SERVICE 2 -->
+          <article class="service-card reveal">
+            <div class="service-icon-box" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                <polyline points="2 17 12 22 22 17"></polyline>
+                <polyline points="2 12 12 17 22 12"></polyline>
+              </svg>
+            </div>
+
+            <h3 class="service-title">Full Stack .NET Development</h3>
+
+            <p class="service-description">
+              Developing complete web applications using modern frontend technologies together with C# and the .NET ecosystem, databases, APIs, and structured application architecture.
+            </p>
+
+            <div class="service-tags-wrap">
+              <span class="tech-pill">C#</span>
+              <span class="tech-pill">.NET</span>
+              <span class="tech-pill">ASP.NET</span>
+              <span class="tech-pill">SQL</span>
+              <span class="tech-pill">APIs</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         7. PROJECTS
+         ======================================================================== -->
+    <section id="projects" class="section">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-tag">Featured Work</span>
+          <h2 class="section-title">Projects</h2>
+          <p class="section-subtitle">Real-world applications and experimental platforms in active development.</p>
+        </div>
+
+        <div class="projects-grid">
+          <!-- Project 1 -->
+          <article class="project-card reveal">
+            <div class="project-top-row">
+              <div class="project-folder-icon" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+                </svg>
+              </div>
+              <span class="coming-soon-badge">Coming Soon</span>
+            </div>
+
+            <h3 class="project-title">Full-Stack Web Platform</h3>
+            <p class="project-desc">
+              A scalable web application focused on solving a practical everyday problem.
+            </p>
+
+            <div class="project-tags">
+              <span class="tech-pill">ASP.NET Core</span>
+              <span class="tech-pill">C#</span>
+              <span class="tech-pill">SQL Server</span>
+            </div>
+
+            <div class="project-footer">
+              <button class="btn-project" type="button" data-project="Full-Stack Web Platform" aria-label="View Full-Stack Web Platform details">
+                <span>View Project</span>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </button>
+            </div>
+          </article>
+
+          <!-- Project 2 -->
+          <article class="project-card reveal">
+            <div class="project-top-row">
+              <div class="project-folder-icon" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+                </svg>
+              </div>
+              <span class="coming-soon-badge">Coming Soon</span>
+            </div>
+
+            <h3 class="project-title">Smart Management System</h3>
+            <p class="project-desc">
+              A management platform designed to simplify workflows, data handling, and user interactions.
+            </p>
+
+            <div class="project-tags">
+              <span class="tech-pill">.NET</span>
+              <span class="tech-pill">REST APIs</span>
+              <span class="tech-pill">JavaScript</span>
+            </div>
+
+            <div class="project-footer">
+              <button class="btn-project" type="button" data-project="Smart Management System" aria-label="View Smart Management System details">
+                <span>View Project</span>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </button>
+            </div>
+          </article>
+
+          <!-- Project 3 -->
+          <article class="project-card reveal">
+            <div class="project-top-row">
+              <div class="project-folder-icon" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+                </svg>
+              </div>
+              <span class="coming-soon-badge">Coming Soon</span>
+            </div>
+
+            <h3 class="project-title">Interactive Donation Platform</h3>
+            <p class="project-desc">
+              A platform concept connecting donors, recipients, volunteers, and administrators.
+            </p>
+
+            <div class="project-tags">
+              <span class="tech-pill">Full-Stack</span>
+              <span class="tech-pill">UI/UX</span>
+              <span class="tech-pill">Database</span>
+            </div>
+
+            <div class="project-footer">
+              <button class="btn-project" type="button" data-project="Interactive Donation Platform" aria-label="View Interactive Donation Platform details">
+                <span>View Project</span>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </button>
+            </div>
+          </article>
+
+          <!-- Project 4 -->
+          <article class="project-card reveal">
+            <div class="project-top-row">
+              <div class="project-folder-icon" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+                </svg>
+              </div>
+              <span class="coming-soon-badge">Coming Soon</span>
+            </div>
+
+            <h3 class="project-title">Developer Project Lab</h3>
+            <p class="project-desc">
+              A collection of practical experiments and applications built while developing full-stack skills.
+            </p>
+
+            <div class="project-tags">
+              <span class="tech-pill">Algorithms</span>
+              <span class="tech-pill">HTML/CSS</span>
+              <span class="tech-pill">C# Labs</span>
+            </div>
+
+            <div class="project-footer">
+              <button class="btn-project" type="button" data-project="Developer Project Lab" aria-label="View Developer Project Lab details">
+                <span>View Project</span>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         8. ACHIEVEMENTS
+         ======================================================================== -->
+    <section id="achievements" class="section">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-tag">Key Milestones</span>
+          <h2 class="section-title">Achievements</h2>
+          <p class="section-subtitle">Dedicated milestones attained throughout academic and engineering training.</p>
+        </div>
+
+        <div class="achievements-grid">
+          <!-- Achievement 1 -->
+          <div class="achievement-card reveal">
+            <div class="achievement-icon-box" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="8" r="7"></circle>
+                <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
+              </svg>
+            </div>
+            <h3 class="achievement-title">Full-Stack Development Journey</h3>
+            <p class="achievement-text">
+              Building practical skills across frontend, backend, databases, and APIs.
+            </p>
+          </div>
+
+          <!-- Achievement 2 -->
+          <div class="achievement-card reveal">
+            <div class="achievement-icon-box" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 20V10"></path>
+                <path d="M12 20V4"></path>
+                <path d="M6 20v-6"></path>
+              </svg>
+            </div>
+            <h3 class="achievement-title">Computer Science Progress</h3>
+            <p class="achievement-text">
+              Maintaining a strong academic performance with a current GPA of 3.82.
+            </p>
+          </div>
+
+          <!-- Achievement 3 -->
+          <div class="achievement-card reveal">
+            <div class="achievement-icon-box" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="16 18 22 12 16 6"></polyline>
+                <polyline points="8 6 2 12 8 18"></polyline>
+              </svg>
+            </div>
+            <h3 class="achievement-title">Hands-On Project Development</h3>
+            <p class="achievement-text">
+              Applying Computer Science concepts through practical software projects.
+            </p>
+          </div>
+
+          <!-- Achievement 4 -->
+          <div class="achievement-card reveal">
+            <div class="achievement-icon-box" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+              </svg>
+            </div>
+            <h3 class="achievement-title">Continuous Learning</h3>
+            <p class="achievement-text">
+              Consistently expanding technical skills through courses, projects, and experimentation.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         9. FEEDBACK
+         ======================================================================== -->
+    <section id="feedback" class="section">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-tag">Testimonials Coming Soon</span>
+          <h2 class="section-title">Feedback</h2>
+          <p class="section-subtitle">Placeholder feedback from upcoming collaborative projects and teammates.</p>
+        </div>
+
+        <div class="feedback-grid">
+          <!-- Card 1 -->
+          <div class="feedback-card reveal">
+            <div class="feedback-quote-icon" aria-hidden="true">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+              </svg>
+            </div>
+
+            <p class="feedback-text">
+              "Your feedback could appear here. Client / teammate feedback placeholder."
+            </p>
+
+            <div class="feedback-author">
+              <div class="feedback-avatar-placeholder" aria-hidden="true">FC</div>
+              <div class="feedback-author-info">
+                <div class="feedback-name">Future Collaborator</div>
+                <div class="feedback-role">Senior Software Engineer (Placeholder)</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="feedback-card reveal">
+            <div class="feedback-quote-icon" aria-hidden="true">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+              </svg>
+            </div>
+
+            <p class="feedback-text">
+              "Your feedback could appear here. Client / teammate feedback placeholder."
+            </p>
+
+            <div class="feedback-author">
+              <div class="feedback-avatar-placeholder" aria-hidden="true">PP</div>
+              <div class="feedback-author-info">
+                <div class="feedback-name">Project Peer</div>
+                <div class="feedback-role">Full-Stack Teammate (Placeholder)</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="feedback-card reveal">
+            <div class="feedback-quote-icon" aria-hidden="true">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+              </svg>
+            </div>
+
+            <p class="feedback-text">
+              "Your feedback could appear here. Client / teammate feedback placeholder."
+            </p>
+
+            <div class="feedback-author">
+              <div class="feedback-avatar-placeholder" aria-hidden="true">IM</div>
+              <div class="feedback-author-info">
+                <div class="feedback-name">Industry Mentor</div>
+                <div class="feedback-role">Tech Lead (Placeholder)</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         10. GET IN TOUCH (CONTACT)
+         ======================================================================== -->
+    <section id="contact" class="section">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-tag">Direct Communication</span>
+          <h2 class="section-title">Get in Touch</h2>
+          <p class="section-subtitle">Reach out for collaborations, questions, or opportunities.</p>
+        </div>
+
+        <div class="contact-card-outer reveal">
+          <div class="contact-layout">
+            <!-- Left Info Side -->
+            <div class="contact-info-side">
+              <div>
+                <h3 class="contact-headline">Let's build something together.</h3>
+                <p class="contact-subtext">
+                  Have an idea, project, or opportunity? Feel free to reach out.
+                </p>
+
+                <!-- Direct Contact Methods -->
+                <div class="contact-methods-list">
+                  <!-- Email -->
+                  <a href="mailto:sandysameh1113@gmail.com" class="contact-item" aria-label="Send email to Sandy Sameh">
+                    <div class="contact-icon-box" aria-hidden="true">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                      </svg>
+                    </div>
+                    <div class="contact-details">
+                      <span class="contact-label">Contact Me</span>
+                      <span class="contact-val">sandysameh1113@gmail.com</span>
+                    </div>
+                  </a>
+
+                  <!-- WhatsApp -->
+                  <a href="https://wa.me/201272088690" target="_blank" rel="noopener noreferrer" class="contact-item" aria-label="Chat with Sandy Sameh on WhatsApp">
+                    <div class="contact-icon-box" aria-hidden="true">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+                      </svg>
+                    </div>
+                    <div class="contact-details">
+                      <span class="contact-label">WhatsApp</span>
+                      <span class="contact-val">01272088690</span>
+                    </div>
+                  </a>
+                </div>
+              </div>
+
+              <!-- Safe Social Placeholder Areas (No invented URLs) -->
+              <div class="contact-social-placeholders">
+                <div class="social-placeholder-bar">
+                  <div style="display: flex; align-items: center; gap: 0.6rem;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                      <rect x="2" y="9" width="4" height="12"></rect>
+                      <circle cx="4" cy="4" r="2"></circle>
+                    </svg>
+                    <span>LinkedIn — 
+                     </span>
+                  </div>
+                  <span class="placeholder-badge">  <a href="https://www.linkedin.com/in/your-username/" target="_blank">
+    LinkedIn
+  </a></span>
+                </div>
+
+                <div class="social-placeholder-bar">
+                  <div style="display: flex; align-items: center; gap: 0.6rem;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                    </svg>
+                    <span>GitHub </span>
+                  </div>
+                  <span class="placeholder-badge">
+<span>
+  <i class="fab fa-github"></i>
+  <a href="https://github.com/sandysameh6" target="_blank">
+    GitHub
+  </a>
+</span>
+```</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Message Action Side -->
+            <div class="contact-action-side">
+              <div class="action-card-inner">
+                <h4 class="action-card-title">Send a Quick Message</h4>
+                <p class="action-card-desc">Clicking "Message Me" prepares a direct email to sandysameh1113@gmail.com.</p>
+
+                <form class="contact-form" id="contactForm">
+                  <div class="form-group">
+                    <label class="form-label" for="contactSenderName">Your Name</label>
+                    <input class="form-input" type="text" id="contactSenderName" placeholder="e.g. Alex Smith" required>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label" for="contactSenderSubject">Subject</label>
+                    <input class="form-input" type="text" id="contactSenderSubject" placeholder="e.g. Full-Stack Project Inquiry" required>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label" for="contactSenderMessage">Message</label>
+                    <textarea class="form-textarea" id="contactSenderMessage" placeholder="Hello Sandy, I would like to connect regarding..." required></textarea>
+                  </div>
+
+                  <!-- Large Primary Button -->
+                  <button type="submit" class="btn btn-primary btn-message-me" id="messageMeBtn">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <line x1="22" y1="2" x2="11" y2="13"></line>
+                      <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                    </svg>
+                    <span>Message Me</span>
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==========================================================================
+       FOOTER
+       ========================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="footer-brand-title">sandy sameh<span style="color: var(--accent-secondary);">.</span></div>
+          <div class="footer-brand-desc">Computer Science Student &bull; Aspiring Full-Stack .NET Developer</div>
+        </div>
+
+        <!-- Small Nav Links -->
+        <ul class="footer-nav">
+          <li><a href="#home" class="footer-nav-link">Home</a></li>
+          <li><a href="#about" class="footer-nav-link">About</a></li>
+          <li><a href="#education" class="footer-nav-link">Education</a></li>
+          <li><a href="#skills" class="footer-nav-link">Skills</a></li>
+          <li><a href="#experience" class="footer-nav-link">Experience</a></li>
+          <li><a href="#services" class="footer-nav-link">Services</a></li>
+          <li><a href="#projects" class="footer-nav-link">Projects</a></li>
+          <li><a href="#contact" class="footer-nav-link">Contact</a></li>
+        </ul>
+
+        <!-- Social Icons Row -->
+        <div class="footer-social-row">
+          <a href="mailto:sandysameh1113@gmail.com" class="social-icon-btn" aria-label="Send email" title="sandysameh1113@gmail.com">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+          </a>
+          <a href="https://wa.me/201272088690" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="WhatsApp" title="WhatsApp: 01272088690">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+            </svg>
+          </a>
+          <a href="www.linkedin.com/in/ sandy-s-s1212" class="social-icon-btn" aria-label="LinkedIn profile area" title="LinkedIn (Profile Placeholder)">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+              <rect x="2" y="9" width="4" height="12"></rect>
+              <circle cx="4" cy="4" r="2"></circle>
+            </svg>
+          </a>
+          <a href="#contact" class="social-icon-btn" aria-label="GitHub profile area" title="GitHub (Profile Placeholder)">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; <span id="currentYearSpan">2026</span> Sandy Sameh. All rights reserved.</div>
+        <div>Crafted with precision &bull; Computer Science &amp; .NET</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating Back to Top Button -->
+  <button class="back-to-top" id="backToTopBtn" type="button" aria-label="Back to top of page" title="Back to top">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+  </button>
+
+  <!-- Interactive Toast Notification Container -->
+  <div class="toast-container" id="toastNotification" role="status" aria-live="polite">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-secondary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="10"></circle>
+      <line x1="12" y1="16" x2="12" y2="12"></line>
+      <line x1="12" y1="8" x2="12.01" y2="8"></line>
+    </svg>
+    <span id="toastMessage">Notification message</span>
+  </div>
+
+  <!-- ==========================================================================
+       JAVASCRIPT LOGIC
+       ========================================================================== -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      'use strict';
+
+      /* ------------------------------------------------------------------------
+         1. THEME TOGGLE (DARK / LIGHT WITH LOCALSTORAGE)
+         ------------------------------------------------------------------------ */
+      const themeToggleBtn = document.getElementById('themeToggleBtn');
+      const rootHtml = document.documentElement;
+      const STORAGE_THEME_KEY = 'sandy_sameh_portfolio_theme';
+
+      // Load saved theme or default to dark
+      const savedTheme = localStorage.getItem(STORAGE_THEME_KEY);
+      if (savedTheme === 'light' || savedTheme === 'dark') {
+        rootHtml.setAttribute('data-theme', savedTheme);
+      } else {
+        rootHtml.setAttribute('data-theme', 'dark');
+      }
+
+      if (themeToggleBtn) {
+        themeToggleBtn.addEventListener('click', () => {
+          const currentTheme = rootHtml.getAttribute('data-theme') || 'dark';
+          const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+          rootHtml.setAttribute('data-theme', newTheme);
+          localStorage.setItem(STORAGE_THEME_KEY, newTheme);
+          showToast(`Switched to ${newTheme} mode`);
+        });
+      }
+
+      /* ------------------------------------------------------------------------
+         2. NAVBAR SCROLL STYLING & BACK TO TOP BUTTON
+         ------------------------------------------------------------------------ */
+      const siteHeader = document.getElementById('siteHeader');
+      const backToTopBtn = document.getElementById('backToTopBtn');
+
+      const handleScrollEffects = () => {
+        const scrollY = window.scrollY;
+
+        // Navbar blur on scroll
+        if (siteHeader) {
+          if (scrollY > 40) {
+            siteHeader.classList.add('scrolled');
+          } else {
+            siteHeader.classList.remove('scrolled');
+          }
+        }
+
+        // Back to top button visibility
+        if (backToTopBtn) {
+          if (scrollY > 450) {
+            backToTopBtn.classList.add('visible');
+          } else {
+            backToTopBtn.classList.remove('visible');
+          }
+        }
+      };
+
+      window.addEventListener('scroll', handleScrollEffects, { passive: true });
+      handleScrollEffects();
+
+      if (backToTopBtn) {
+        backToTopBtn.addEventListener('click', () => {
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
+      }
+
+      /* ------------------------------------------------------------------------
+         3. MOBILE NAVIGATION DRAWER
+         ------------------------------------------------------------------------ */
+      const hamburgerBtn = document.getElementById('hamburgerBtn');
+      const mobileNavDrawer = document.getElementById('mobileNavDrawer');
+      const mobileNavBackdrop = document.getElementById('mobileNavBackdrop');
+      const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+      const setMobileMenuState = (isOpen) => {
+        if (!hamburgerBtn || !mobileNavDrawer || !mobileNavBackdrop) return;
+        hamburgerBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        if (isOpen) {
+          mobileNavDrawer.classList.add('open');
+          mobileNavBackdrop.classList.add('open');
+          document.body.style.overflow = 'hidden';
+        } else {
+          mobileNavDrawer.classList.remove('open');
+          mobileNavBackdrop.classList.remove('open');
+          document.body.style.overflow = '';
+        }
+      };
+
+      if (hamburgerBtn) {
+        hamburgerBtn.addEventListener('click', () => {
+          const isExpanded = hamburgerBtn.getAttribute('aria-expanded') === 'true';
+          setMobileMenuState(!isExpanded);
+        });
+      }
+
+      if (mobileNavBackdrop) {
+        mobileNavBackdrop.addEventListener('click', () => {
+          setMobileMenuState(false);
+        });
+      }
+
+      // Close menu on selecting any link
+      mobileNavLinks.forEach((link) => {
+        link.addEventListener('click', () => {
+          setMobileMenuState(false);
+        });
+      });
+
+      /* ------------------------------------------------------------------------
+         4. ACTIVE NAVIGATION TRACKING (INTERSECTION OBSERVER)
+         ------------------------------------------------------------------------ */
+      const sections = document.querySelectorAll('section[id]');
+      const desktopNavLinks = document.querySelectorAll('.nav-link');
+
+      const navObserverOptions = {
+        root: null,
+        rootMargin: '-20% 0px -65% 0px',
+        threshold: 0
+      };
+
+      const navObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const currentId = entry.target.getAttribute('id');
+
+            // Update desktop nav
+            desktopNavLinks.forEach((link) => {
+              if (link.getAttribute('href') === `#${currentId}`) {
+                link.classList.add('active');
+              } else {
+                link.classList.remove('active');
+              }
+            });
+
+            // Update mobile nav
+            mobileNavLinks.forEach((link) => {
+              if (link.getAttribute('href') === `#${currentId}`) {
+                link.classList.add('active');
+              } else {
+                link.classList.remove('active');
+              }
+            });
+          }
+        });
+      }, navObserverOptions);
+
+      sections.forEach((sec) => navObserver.observe(sec));
+
+      /* ------------------------------------------------------------------------
+         5. SCROLL REVEAL ANIMATIONS (INTERSECTION OBSERVER)
+         ------------------------------------------------------------------------ */
+      const revealElements = document.querySelectorAll('.reveal');
+
+      const revealObserverOptions = {
+        root: null,
+        rootMargin: '0px 0px -80px 0px',
+        threshold: 0.1
+      };
+
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, revealObserverOptions);
+
+      revealElements.forEach((el) => revealObserver.observe(el));
+
+      /* ------------------------------------------------------------------------
+         6. SUBTLE MOUSE PARALLAX (HERO BLOBS - DESKTOP ONLY)
+         ------------------------------------------------------------------------ */
+      const heroSection = document.getElementById('home');
+      const blob1 = document.getElementById('blob1');
+      const blob2 = document.getElementById('blob2');
+      const blob3 = document.getElementById('blob3');
+
+      // Check if device supports fine hover pointer and not reduced motion
+      const canParallax = window.matchMedia('(pointer: fine)').matches &&
+                          !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (canParallax && heroSection && blob1 && blob2) {
+        let mouseX = 0;
+        let mouseY = 0;
+        let targetX = 0;
+        let targetY = 0;
+
+        heroSection.addEventListener('mousemove', (e) => {
+          const rect = heroSection.getBoundingClientRect();
+          const relativeX = (e.clientX - rect.left) / rect.width - 0.5;
+          const relativeY = (e.clientY - rect.top) / rect.height - 0.5;
+          targetX = relativeX * 35;
+          targetY = relativeY * 35;
+        });
+
+        // Smooth requestAnimationFrame loop
+        const animateParallax = () => {
+          mouseX += (targetX - mouseX) * 0.08;
+          mouseY += (targetY - mouseY) * 0.08;
+
+          blob1.style.transform = `translate(${mouseX * 0.9}px, ${mouseY * 0.9}px)`;
+          blob2.style.transform = `translate(${-mouseX * 1.1}px, ${-mouseY * 1.1}px)`;
+          if (blob3) {
+            blob3.style.transform = `translate(${mouseY * 0.7}px, ${-mouseX * 0.7}px)`;
+          }
+
+          requestAnimationFrame(animateParallax);
+        };
+        requestAnimationFrame(animateParallax);
+      }
+
+      /* ------------------------------------------------------------------------
+         7. PROJECT BUTTONS & MODAL / TOAST DEMONSTRATION
+         ------------------------------------------------------------------------ */
+      const projectButtons = document.querySelectorAll('.btn-project');
+      projectButtons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const projectTitle = btn.getAttribute('data-project') || 'Project';
+          showToast(`"${projectTitle}" preview coming soon!`);
+        });
+      });
+
+      /* ------------------------------------------------------------------------
+         8. CONTACT FORM & "MESSAGE ME" ACTION
+         ------------------------------------------------------------------------ */
+      const contactForm = document.getElementById('contactForm');
+      if (contactForm) {
+        contactForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+
+          const name = document.getElementById('contactSenderName').value.trim();
+          const subject = document.getElementById('contactSenderSubject').value.trim();
+          const message = document.getElementById('contactSenderMessage').value.trim();
+
+          const mailtoSubject = encodeURIComponent(subject || 'Portfolio Inquiry');
+          const mailtoBody = encodeURIComponent(`From: ${name}\n\n${message}`);
+          const recipient = 'sandysameh1113@gmail.com';
+
+          // Open mail client
+          window.location.href = `mailto:${recipient}?subject=${mailtoSubject}&body=${mailtoBody}`;
+
+          showToast('Opening your email client to message Sandy...');
+        });
+      }
+
+      /* ------------------------------------------------------------------------
+         9. TOAST NOTIFICATION UTILITY
+         ------------------------------------------------------------------------ */
+      const toastEl = document.getElementById('toastNotification');
+      const toastMsgEl = document.getElementById('toastMessage');
+      let toastTimeout = null;
+
+      function showToast(message) {
+        if (!toastEl || !toastMsgEl) return;
+        toastMsgEl.textContent = message;
+        toastEl.classList.add('show');
+
+        if (toastTimeout) clearTimeout(toastTimeout);
+        toastTimeout = setTimeout(() => {
+          toastEl.classList.remove('show');
+        }, 3200);
+      }
+
+      /* ------------------------------------------------------------------------
+         10. AUTOMATIC CURRENT YEAR UPDATE
+         ------------------------------------------------------------------------ */
+      const currentYearSpan = document.getElementById('currentYearSpan');
+      if (currentYearSpan) {
+        currentYearSpan.textContent = new Date().getFullYear();
+      }
+
+    });
+  </script>
+</body>
+</html>
